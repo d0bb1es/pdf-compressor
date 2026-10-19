@@ -1,3 +1,5 @@
+#![cfg_attr(all(target_os = "windows", not(debug_assertions)), windows_subsystem = "windows")]
+
 use eframe::egui;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -60,6 +62,40 @@ fn is_pdf(p: &Path) -> bool {
     p.is_file() && p.extension().is_some_and(|e| e.eq_ignore_ascii_case("pdf"))
 }
 
+#[cfg(windows)]
+fn find_gs() -> PathBuf {
+    // The Ghostscript installer does not add itself to PATH, so look in the default folders.
+    for root in ["C:\\Program Files\\gs", "C:\\Program Files (x86)\\gs"] {
+        if let Ok(rd) = fs::read_dir(root) {
+            let mut dirs: Vec<PathBuf> = rd.flatten().map(|e| e.path()).collect();
+            dirs.sort();
+            for d in dirs.into_iter().rev() {
+                for exe in ["gswin64c.exe", "gswin32c.exe"] {
+                    let p = d.join("bin").join(exe);
+                    if p.is_file() {
+                        return p;
+                    }
+                }
+            }
+        }
+    }
+    PathBuf::from("gswin64c") // fall back to PATH
+}
+
+fn gs_command() -> Command {
+    #[cfg(windows)]
+    {
+        use std::os::windows::process::CommandExt;
+        let mut c = Command::new(find_gs());
+        c.creation_flags(0x0800_0000); // CREATE_NO_WINDOW: no console flash
+        c
+    }
+    #[cfg(not(windows))]
+    {
+        Command::new("gs")
+    }
+}
+
 fn compress(input: PathBuf, output: PathBuf, preset: &str, force: bool) -> Result<Stats, String> {
     if !is_pdf(&input) {
         return Err("Input must be an existing PDF file".into());
@@ -73,7 +109,7 @@ fn compress(input: PathBuf, output: PathBuf, preset: &str, force: bool) -> Resul
         return Err("Input and output must be different files".into());
     }
 
-    let status = Command::new("gs")
+    let status = gs_command()
         .arg("-sDEVICE=pdfwrite")
         .arg("-dCompatibilityLevel=1.4")
         .arg(format!("-dPDFSETTINGS=/{preset}"))
