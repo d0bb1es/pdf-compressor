@@ -107,6 +107,4 @@ If this saved you time, you can tip in crypto. Always double-check the network b
 ## License
 
 MIT. Ghostscript is a separate program under AGPL and is not bundled with this tool.
-## License
 
-MIT. Ghostscript is a separate program under AGPL and is not bundled with this tool.
