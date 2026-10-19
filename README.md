@@ -56,7 +56,7 @@ cargo build --release
 
 If this saved you time, you can tip in crypto. Always double-check the network before sending.
 
- BTC on Bitcoin network : `bc1qhklfl2t5h9x2adrdae50vl5ackctceuhn36hah`      
+ BTC : `bc1qhklfl2t5h9x2adrdae50vl5ackctceuhn36hah`      
  USDC / USDT / DAI on Ethereum network :  `0x77690c56dcED98c43b5FE3c14C81E06471b4A58c`        
 
 ## License
