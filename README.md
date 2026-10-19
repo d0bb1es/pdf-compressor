@@ -44,24 +44,20 @@ cargo build --release
 
 ## Presets
 
-| Preset     | Result                              |
-|------------|-------------------------------------|
-| `screen`   | Smallest file, low quality (72 dpi) |
-| `ebook`    | Good balance (150 dpi), default     |
-| `printer`  | High quality (300 dpi)              |
-| `prepress` | Highest quality, color preserving   |
-| `default`  | Ghostscript default                 |
+ Preset      Result                              
+----------------------------------------------------
+ `screen`    Smallest file, low quality (72 dpi) 
+ `ebook`     Good balance (150 dpi), default     
+ `printer`   High quality (300 dpi)              
+ `prepress`  Highest quality, color preserving   
+ `default`   Ghostscript default                 
 
 ## Support
 
 If this saved you time, you can tip in crypto. Always double-check the network before sending.
 
-| Asset | Network | Address |
-|-------|---------|---------|
-| BTC | Bitcoin | `YOUR_BTC_ADDRESS` |
-| BTC | Lightning | `YOUR_LIGHTNING_ADDRESS` |
-| ETH | Ethereum / Base / Arbitrum | `YOUR_ETH_ADDRESS` |
-| USDC / USDT | `NETWORK` | `YOUR_STABLECOIN_ADDRESS` |
+ BTC on Bitcoin network : `bc1qhklfl2t5h9x2adrdae50vl5ackctceuhn36hah`      
+ USDC / USDT / DAI on Ethereum network :  `0x77690c56dcED98c43b5FE3c14C81E06471b4A58c`        
 
 ## License
 
