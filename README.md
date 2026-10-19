@@ -85,6 +85,7 @@ cd pdf-compressor
 cargo build --release
 ./target/release/pdf-compressor-gui
 ```
+**Windows:** install [Ghostscript](https://ghostscript.com/releases/gsdnld.html), then download `pdf-compressor-windows-x86_64.exe` from Releases and run it.
 
 ## Presets
 
